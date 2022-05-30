@@ -6,26 +6,26 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Main extends ApplicationAdapter {
-	SpriteBatch batch;
-	Texture img;
+	public static int WIDTH = 1000;
+	public static int HEIGHT = 700;
+	static int state = 0;
+	MenuState menuState;
 	
 	@Override
 	public void create () {
-		batch = new SpriteBatch();
-		img = new Texture("badlogic.jpg");
+		menuState = new MenuState();
 	}
 
 	@Override
 	public void render () {
-		ScreenUtils.clear(1, 0, 0, 1);
-		batch.begin();
-		batch.draw(img, 0, 0);
-		batch.end();
+		State.run(state);
 	}
+
 	
 	@Override
 	public void dispose () {
-		batch.dispose();
-		img.dispose();
+//		menuState.batch.dispose();
+//		menuState.img.dispose();
+		menuState.dispose();
 	}
 }
