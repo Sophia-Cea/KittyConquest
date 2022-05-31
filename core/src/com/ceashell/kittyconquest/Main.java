@@ -1,9 +1,6 @@
 package com.ceashell.kittyconquest;
 
 import com.badlogic.gdx.ApplicationAdapter;
-import com.badlogic.gdx.graphics.Texture;
-import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.utils.ScreenUtils;
 
 public class Main extends ApplicationAdapter {
 	public static int WIDTH = 1000;
@@ -11,11 +8,14 @@ public class Main extends ApplicationAdapter {
 	static int state = 1;
 	MenuState menuState;
 	WorldState worldState;
+	AssetManager assetManager;
 	
 	@Override
 	public void create () {
+		assetManager = new AssetManager();
 		menuState = new MenuState();
-		worldState = new WorldState();
+		worldState = new WorldState(assetManager);
+
 	}
 
 	@Override
@@ -23,10 +23,10 @@ public class Main extends ApplicationAdapter {
 		State.run(state);
 	}
 
-	
 	@Override
 	public void dispose () {
 		menuState.dispose();
 		worldState.dispose();
+		assetManager.dispose();
 	}
 }

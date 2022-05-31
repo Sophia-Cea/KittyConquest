@@ -1,25 +1,35 @@
 package com.ceashell.kittyconquest;
 
-import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Input;
-import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.ceashell.kittyconquest.world.World;
+
+import java.util.Arrays;
 
 public class WorldState extends State {
     public SpriteBatch batch;
-    public Texture img;
-    Animation cat = new Animation(new TextureRegion(new Texture("cats.png"), 0, 100, 144, 52), 3, .5f);
-
-    public WorldState() {
+    World world;
+    public WorldState(AssetManager assetManager) {
         batch = new SpriteBatch();
-        img = new Texture("badlogic.jpg");
+        world = new World(5,5);
+        int[] fg = {
+                0,0,-1,-1,0,
+                -1,-1,0,0,0,
+                0,-1,0,0,0,
+                -1,-1,0,0,0,
+                -1,0,0,0,0,
+        };
+
+        int[] bg = new int[25];
+        Arrays.fill(bg, -1);
+
+        world.init(bg, fg, assetManager);
+
     }
 
     @Override
     public void update(float delta) {
-        cat.update(delta);
+
     }
 
     @Override
@@ -31,13 +41,14 @@ public class WorldState extends State {
     public void render() {
         ScreenUtils.clear(1, 1, 1, 1);
         batch.begin();
-        batch.draw(cat.getFrame(), 100, 100, 250,200);
+        world.draw(batch);
         batch.end();
     }
 
     @Override
     public void dispose() {
         batch.dispose();
-        img.dispose();
+        world.dispose();
+
     }
 }
