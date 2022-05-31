@@ -2,6 +2,7 @@ package com.ceashell.kittyconquest.world;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.ceashell.kittyconquest.AssetManager;
+import com.ceashell.kittyconquest.world.tiles.TileType;
 
 import java.awt.*;
 

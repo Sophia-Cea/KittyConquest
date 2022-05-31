@@ -5,8 +5,8 @@ import com.ceashell.kittyconquest.world.Tile;
 
 import java.awt.*;
 
-public class Grass extends Tile {
-    protected Grass(Point position, TextureRegion texture) {
-        super(position, TileType.GRASS, texture);
+public class Brick extends Tile {
+    protected Brick(Point position, TextureRegion texture) {
+        super(position, TileType.BRICK, texture);
     }
 }

@@ -3,6 +3,7 @@ package com.ceashell.kittyconquest.world;
 import com.badlogic.gdx.graphics.g2d.Sprite;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.ceashell.kittyconquest.world.tiles.TileType;
 
 import java.awt.*;
 

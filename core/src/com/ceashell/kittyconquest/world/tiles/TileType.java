@@ -1,7 +1,9 @@
-package com.ceashell.kittyconquest.world;
+package com.ceashell.kittyconquest.world.tiles;
 
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.ceashell.kittyconquest.AssetManager;
+import com.ceashell.kittyconquest.world.Tile;
+import com.ceashell.kittyconquest.world.tiles.Brick;
 import com.ceashell.kittyconquest.world.tiles.Grass;
 
 import java.awt.*;
@@ -12,6 +14,14 @@ public enum TileType {
         public Tile fromType(AssetManager assetManager) {
             TextureRegion texure = assetManager.get("clover");
             return new Grass(new Point(0,0), texure);
+        }
+    },
+
+    BRICK(Brick.class){
+        @Override
+        public Tile fromType(AssetManager assetManager) {
+            TextureRegion texure = assetManager.get("brick1");
+            return new Brick(new Point(0,0), texure);
         }
     };
 
