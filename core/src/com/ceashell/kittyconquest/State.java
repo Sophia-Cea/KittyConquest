@@ -1,5 +1,7 @@
 package com.ceashell.kittyconquest;
 
+import com.badlogic.gdx.Gdx;
+
 import java.util.ArrayList;
 
 public abstract class State {
@@ -11,14 +13,14 @@ public abstract class State {
         index = states.size() - 1;
     }
 
-    public abstract void update();
+    public abstract void update(float delta);
 
     public abstract void handleInput();
 
     public abstract void render();
 
     public static void run(int state) {
-        states.get(state).update();
+        states.get(state).update(Gdx.graphics.getDeltaTime());
         states.get(state).handleInput();
         states.get(state).render();
     }
