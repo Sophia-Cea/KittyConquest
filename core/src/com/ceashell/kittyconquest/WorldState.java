@@ -1,5 +1,7 @@
 package com.ceashell.kittyconquest;
 
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
@@ -11,7 +13,6 @@ public class WorldState extends State {
     Animation cat = new Animation(new TextureRegion(new Texture("cats.png"), 0, 100, 144, 52), 3, .5f);
 
     public WorldState() {
-        super();
         batch = new SpriteBatch();
         img = new Texture("badlogic.jpg");
     }

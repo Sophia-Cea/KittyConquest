@@ -8,6 +8,11 @@ public abstract class State {
     public static ArrayList<State> states = new ArrayList();
     int index;
 
+/*
+ Note: I was worried here that states might not get added to the list if super() isn't called in the subclass'
+ constructor, but that turned out not to be an issue. Still, it could be an issue later. Delete this when you read it.
+ -Andrew
+ */
     public State() {
         states.add(this);
         index = states.size() - 1;
