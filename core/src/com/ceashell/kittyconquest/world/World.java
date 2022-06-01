@@ -1,14 +1,17 @@
 package com.ceashell.kittyconquest.world;
 
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.ceashell.kittyconquest.AssetManager;
-import com.ceashell.kittyconquest.world.tiles.TileType;
+import com.ceashell.kittyconquest.world.tiles.*;
 
 import java.awt.*;
 
 
 public class World {
     public static final float TILE_SIZE = 100f;
+    // might remove separation of background and foreground: might just make it an ArrayList.
+    // Though if I do that, it'll be hard to have that effect with the hiding behind trees you were talking about that you want.
     private Tile[][] background;
     private Tile[][] foreground;
     public final int width;
@@ -21,9 +24,9 @@ public class World {
         this.height = height;
     }
 
-    public void init(int[] bg, int[] fg, AssetManager assetManager) {
-        background = initTiles(bg, assetManager);
-        foreground = initTiles(fg, assetManager);
+    public void init(int[] bg, int[] fg) {
+        background = initTiles(bg);
+        foreground = initTiles(fg);
     }
 
 //    TODO : Use camera
@@ -62,27 +65,38 @@ public class World {
         }
     }
 
-    private Tile[][] initTiles(int[] source, AssetManager assetManager) {
+    private Tile[][] initTiles(int[] source) {
         assert source.length == this.width * this.height; // make sure they're the same size
         Tile[][] target = new Tile[height][width];
 
         TileType[] types = TileType.values(); // turn int[] -> TileType[]
         int x = 0;
         int y = height-1;
-        for(int i = 0; i < source.length; i++){
-            if(source[i] != -1) { // -1 -> no tile there
-                TileType type = types[source[i]];
-                Tile tile = type.fromType(assetManager);
+        for (int type : source) {
+            if (type > -1) { // type<=-1 -> no tile there
+                TileType tileType = types[type];
+                Tile tile = createTile(tileType, x, y);
                 setTile(target, tile, x, y);
             }
-
             x++;
-            if(x == width) {
+            if (x == width) {
                 x = 0;
                 y--;
             }
         }
         return target;
+    }
+
+    private Tile createTile(TileType type, int x, int y){
+        TextureRegion texture = AssetManager.getInstance().get(type.assetName);
+        Point position = new Point(x, y);
+        switch(type.z_index){
+            case 0: return new BasicFloorTile(position, type, texture);
+            case 1: {
+                return new BasicFloorTile(position, type, texture); // TODO : Determine what to do with more complex tiles.
+            }
+            default: throw new Error("Type not supported by TileFactory!");
+        }
     }
 
     public void dispose(){

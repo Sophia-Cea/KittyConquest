@@ -14,7 +14,7 @@ public class Main extends ApplicationAdapter {
 	public void create () {
 		assetManager = new AssetManager();
 		menuState = new MenuState();
-		worldState = new WorldState(assetManager);
+		worldState = new WorldState();
 
 	}
 

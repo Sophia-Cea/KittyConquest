@@ -9,7 +9,7 @@ import java.util.Arrays;
 public class WorldState extends State {
     public SpriteBatch batch;
     World world;
-    public WorldState(AssetManager assetManager) {
+    public WorldState() {
         batch = new SpriteBatch();
         world = new World(5,5);
         int[] fg = {
@@ -23,7 +23,7 @@ public class WorldState extends State {
         int[] bg = new int[25];
         Arrays.fill(bg, -1);
 
-        world.init(bg, fg, assetManager);
+        world.init(bg, fg);
 
     }
 
