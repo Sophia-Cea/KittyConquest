@@ -22,11 +22,20 @@ public class TileFactory {
      */
     public static Tile create(TileType type, Point position){
         TextureRegion texture = AssetManager.getInstance().get(type.assetName);
+        Class<?> c = type.classType;
+        if (type.classType.equals(BasicFloorTile.class)) {
+            return new BasicFloorTile(position, type, texture);
+        } else if (c.equals(ScaledTile.class)) {
+            Tile tile = createScaledTile(type, position, texture);
+            if(tile != null) return tile;
+        }
+        throw new Error("Type not supported by TileFactory!");
+    }
 
+    private static Tile createScaledTile(TileType type, Point position, TextureRegion textureRegion){
         switch(type){
-            case GRASS: return new Grass(position, texture);
-            case BRICK: return new Brick(position, texture);
-            default: throw new Error("Type not supported by TileFactory!");
+            case BRICK: return new ScaledTile(position, type, textureRegion, 1, 1.5f);
+            default: return null;
         }
     }
 }

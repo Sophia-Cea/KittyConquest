@@ -20,11 +20,11 @@ public class WorldState extends State {
         batch = new SpriteBatch();
         world = new World(5,5);
         int[] fg = {
-                1,1,-1,-1,1,
-                -1,-1,1,1,1,
-                1,-1,1,1,1,
-                -1,-1,1,1,1,
-                -1,1,1,1,1,
+                -1,-1,-1,-1,-1,
+                -1,-1,-1,-1,-1,
+                -1,1,-1,1,-1,
+                -1,-1,-1,-1,-1,
+                -1,-1,-1,-1,-1,
         };
 
         int[] bg = new int[25];

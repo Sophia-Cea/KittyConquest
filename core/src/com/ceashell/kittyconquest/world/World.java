@@ -81,13 +81,13 @@ public class World {
         assert source.length == this.width * this.height; // make sure they're the same size
         Tile[][] target = new Tile[height][width];
 
-        TileType[] types = TileType.values(); // turn int[] -> TileType[]
+
         int x = 0;
         int y = height-1;
         for (int type : source) {
             if (type > -1) { // type<=-1 -> no tile there
-                TileType tileType = types[type];
-                Tile tile = createTile(tileType, x, y);
+                TileType tileType = TileType.FromOrdinal(type);
+                Tile tile = TileFactory.create(tileType, new Point(x, y));
                 setTile(target, tile, x, y);
             }
             x++;
@@ -99,17 +99,7 @@ public class World {
         return target;
     }
 
-    private Tile createTile(TileType type, int x, int y){
-        TextureRegion texture = AssetManager.getInstance().get(type.assetName);
-        Point position = new Point(x, y);
-        switch(type.z_index){
-            case 0: return new BasicFloorTile(position, type, texture);
-            case 1: {
-                return new BasicFloorTile(position, type, texture); // TODO : Determine what to do with more complex tiles.
-            }
-            default: throw new Error("Type not supported by TileFactory!");
-        }
-    }
+
 
     public void dispose(){
         this.background = null;
