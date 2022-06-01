@@ -35,21 +35,33 @@ public class World {
         drawArray(foreground, batch);
     }
 
-    public void setForegroundTile(Tile tile, int x, int y){
-        setTile(foreground, tile, x, y);
+    public boolean isInBounds(int x, int y){
+        return x >= 0 && x < width && y >= 0 && y < height;
+    }
+    public boolean isInBounds(Point p){
+        return p.x >= 0 && p.x < width && p.y >= 0 && p.y < height;
     }
 
-    public void setBackgroundTile(Tile tile, int x, int y){
-        setTile(background, tile, x, y);
+    public boolean setForegroundTile(Tile tile, int x, int y){
+        return setTile(foreground, tile, x, y);
     }
 
-    private void setTile(Tile[][] target, Tile tile, int x, int y){
-        tile.setPosition(new Point(x, y));
-        target[y][x] = tile;
+    public boolean setBackgroundTile(Tile tile, int x, int y){
+        return setTile(background, tile, x, y);
+    }
+
+    private boolean setTile(Tile[][] target, Tile tile, int x, int y) {
+        if(isInBounds(x, y)) {
+            if (tile != null) tile.setPosition(new Point(x, y));
+            target[y][x] = tile;
+            return true;
+        }
+        return false;
     }
 
     public Tile getForegroundTile(int x, int y){
-        return foreground[y][x];
+        if(isInBounds(x, y)) return foreground[y][x];
+        return null;
     }
 
     public Tile getBackgroundTile(int x, int y){

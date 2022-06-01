@@ -5,9 +5,8 @@ import com.ceashell.kittyconquest.world.Tile;
 
 import java.awt.*;
 
-public class Grass extends Tile {
-    // unused at the moment
-    protected Grass(Point position, TextureRegion texture) {
-        super(position, TileType.GRASS, texture);
+public class BasicFloorTile extends Tile {
+    public BasicFloorTile(Point position, TileType type, TextureRegion texture) {
+        super(position, type, texture);
     }
 }
