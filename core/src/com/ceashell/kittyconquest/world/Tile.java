@@ -17,9 +17,11 @@ public abstract class Tile {
         this.type = type;
         this.sprite = new Sprite(texture);
         this.sprite.setSize(World.TILE_SIZE, World.TILE_SIZE);
+        this.sprite.setOrigin(0,0);
         this.position = position;
     }
 
+    public void update(float delta){}
     public void render(SpriteBatch batch){
         sprite.draw(batch);
     }

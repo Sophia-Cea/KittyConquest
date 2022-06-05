@@ -1,6 +1,9 @@
 package com.ceashell.kittyconquest.world.tiles;
 
+import com.badlogic.gdx.graphics.g2d.TextureAtlas;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
+import com.badlogic.gdx.utils.Array;
+import com.ceashell.kittyconquest.Animation;
 import com.ceashell.kittyconquest.AssetManager;
 import com.ceashell.kittyconquest.world.Tile;
 
@@ -28,13 +31,31 @@ public class TileFactory {
         } else if (c.equals(ScaledTile.class)) {
             Tile tile = createScaledTile(type, position, texture);
             if(tile != null) return tile;
+        } else if (c.equals(AnimatedTile.class)) {
+            Tile tile = createAnimatedTile(type, position, texture);
+            if(tile != null) return tile;
         }
         throw new Error("Type not supported by TileFactory!");
     }
 
     private static Tile createScaledTile(TileType type, Point position, TextureRegion textureRegion){
         switch(type){
-            case BRICK: return new ScaledTile(position, type, textureRegion, 1, 1.5f);
+            case BRICK: {
+                System.out.println("Brick position = " + position);
+                return new ScaledTile(position, type, textureRegion, 1, 1.5f);
+            }
+            default: return null;
+        }
+    }
+
+    private static Tile createAnimatedTile(TileType type, Point position, TextureRegion textureRegion){
+        Array<TextureAtlas.AtlasRegion> frames = AssetManager.getInstance().getAnimation(type.assetName);
+        Animation animation;
+        switch(type){
+            case WAVE: {
+                animation = new Animation(textureRegion, 3, 0.5f);
+                return new AnimatedTile(position, type, animation);
+            }
             default: return null;
         }
     }

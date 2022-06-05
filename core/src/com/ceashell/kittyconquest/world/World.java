@@ -6,6 +6,7 @@ import com.ceashell.kittyconquest.AssetManager;
 import com.ceashell.kittyconquest.world.tiles.*;
 
 import java.awt.*;
+import java.util.Arrays;
 
 
 public class World {
@@ -24,6 +25,8 @@ public class World {
         this.height = height;
     }
 
+
+
     public void init(int[] bg, int[] fg) {
         background = initTiles(bg);
         foreground = initTiles(fg);
@@ -33,6 +36,19 @@ public class World {
     public void draw(SpriteBatch batch){
         drawArray(background, batch);
         drawArray(foreground, batch);
+    }
+
+    public void update(float delta){
+        updateArray(foreground, delta);
+        updateArray(background, delta);
+    }
+
+    private void updateArray(Tile[][] target, float delta){
+        for (Tile[] tiles : target) {
+            for (Tile tile : tiles) {
+                if(tile != null) tile.update(delta);
+            }
+        }
     }
 
     public boolean isInBounds(int x, int y){

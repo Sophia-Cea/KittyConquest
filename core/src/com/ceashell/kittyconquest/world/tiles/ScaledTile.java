@@ -8,6 +8,7 @@ import java.awt.*;
 public class ScaledTile extends Tile {
     protected ScaledTile(Point position, TileType type, TextureRegion texture, float scaleX, float scaleY) {
         super(position, type, texture);
+        this.sprite.setOrigin(0,0);
         this.sprite.setScale(scaleX, scaleY);
     }
 }
