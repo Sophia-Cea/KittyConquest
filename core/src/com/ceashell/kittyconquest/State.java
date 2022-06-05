@@ -25,8 +25,8 @@ public abstract class State {
     public abstract void render();
 
     public static void run(int state) {
-        states.get(state).update(Gdx.graphics.getDeltaTime());
         states.get(state).handleInput();
+        states.get(state).update(Gdx.graphics.getDeltaTime());
         states.get(state).render();
     }
 
