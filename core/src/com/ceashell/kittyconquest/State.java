@@ -30,5 +30,7 @@ public abstract class State {
         states.get(state).render();
     }
 
+    public void resize(int width, int height){}
+
     public abstract void dispose();
 }

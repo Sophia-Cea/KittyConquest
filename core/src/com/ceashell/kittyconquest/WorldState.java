@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.utils.ScreenUtils;
+import com.badlogic.gdx.utils.viewport.FitViewport;
 import com.ceashell.kittyconquest.world.Tile;
 import com.ceashell.kittyconquest.world.World;
 import com.ceashell.kittyconquest.world.entities.states.*;
@@ -17,6 +18,7 @@ import java.util.Map;
 public class WorldState extends State {
     public SpriteBatch batch;
     private GameCamera camera;
+    private final FitViewport viewport;
     World world;
     WorldPlayer overworldPlayer;
 
@@ -41,6 +43,8 @@ public class WorldState extends State {
 
         world.init(bg, fg);
         camera = new GameCamera(Gdx.graphics.getWidth(), Gdx.graphics.getHeight());
+        viewport = new FitViewport(Gdx.graphics.getWidth(), Gdx.graphics.getHeight(), camera);
+        viewport.apply();
 
         overworldPlayer = new WorldPlayer(new Point(2,2));
         HashMap<String, StateGenerator> playerStates = new HashMap<>();
@@ -72,10 +76,16 @@ public class WorldState extends State {
     @Override
     public void render() {
         ScreenUtils.clear(1, 1, 1, 1);
+//        viewport.apply(true);
         batch.setProjectionMatrix(camera.combined);
         batch.begin();
         world.draw(batch);
         batch.end();
+    }
+
+    @Override
+    public void resize(int width, int height) {
+        this.viewport.update(width, height);
     }
 
     @Override
