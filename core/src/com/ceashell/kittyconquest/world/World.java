@@ -1,16 +1,14 @@
 package com.ceashell.kittyconquest.world;
 
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.ceashell.kittyconquest.AssetManager;
 import com.ceashell.kittyconquest.world.tiles.*;
-
 import java.awt.*;
-import java.util.Arrays;
-
 
 public class World {
-    public static final float TILE_SIZE = 100f;
+    public static final float TILE_SIZE = Gdx.graphics.getWidth() / 16.0f;
     // might remove separation of background and foreground: might just make it an ArrayList.
     // Though if I do that, it'll be hard to have that effect with the hiding behind trees you were talking about that you want.
     private Tile[][] background;
@@ -24,8 +22,6 @@ public class World {
         this.width = width;
         this.height = height;
     }
-
-
 
     public void init(int[] bg, int[] fg) {
         background = initTiles(bg);
@@ -78,6 +74,9 @@ public class World {
     public Tile getForegroundTile(int x, int y){
         if(isInBounds(x, y)) return foreground[y][x];
         return null;
+    }
+    public Tile getForegroundTile(Point position){
+        return getForegroundTile(position.x, position.y);
     }
 
     public Tile getBackgroundTile(int x, int y){

@@ -11,12 +11,12 @@ public class Animation {
     private int frameCount;
     private int frame;
 
-    public Animation(TextureRegion region, int frameCount, float cycleTime){
-        source = region;
+    public Animation(TextureRegion texture, int frameCount, float cycleTime){
+        source = texture;
         frames = new Array<>();
-        int frameWidth = region.getRegionWidth() / frameCount;
+        int frameWidth = texture.getRegionWidth() / frameCount;
         for(int i = 0; i < frameCount; i++){
-            frames.add(new TextureRegion(region, i * frameWidth, 0, frameWidth, region.getRegionHeight()));
+            frames.add(new TextureRegion(texture, i * frameWidth, 0, frameWidth, texture.getRegionHeight()));
         }
         this.frameCount = frameCount;
         maxFrameTime = cycleTime / frameCount;
@@ -36,6 +36,10 @@ public class Animation {
 
     public TextureRegion getFrame(){
         return frames.get(frame);
+    }
+
+    public void reset(){
+        this.frame = 0;
     }
 
     public void dispose(){

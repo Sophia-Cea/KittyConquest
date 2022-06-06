@@ -3,8 +3,11 @@ package com.ceashell.kittyconquest.battle;
 import com.ceashell.kittyconquest.State;
 
 public class BattleState extends State {
-    public BattleState() {
+    private BattlePlayer player;
+
+    public BattleState(BattlePlayer player) {
         super();
+        this.player = player;
     }
 
     @Override

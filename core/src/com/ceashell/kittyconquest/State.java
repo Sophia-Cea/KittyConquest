@@ -5,7 +5,7 @@ import com.badlogic.gdx.Gdx;
 import java.util.ArrayList;
 
 public abstract class State {
-    public static ArrayList<State> states = new ArrayList();
+    public static ArrayList<State> states = new ArrayList<>();
     int index;
 
 /*
