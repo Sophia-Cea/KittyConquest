@@ -7,7 +7,7 @@ public class EntityIdleState extends EntityState{
 
     public EntityIdleState(Entity entity) {
         super(entity);
-        this.entity.changeAnimation("idle");
+
     }
 
     @Override
@@ -17,7 +17,7 @@ public class EntityIdleState extends EntityState{
 
     @Override
     public void onEnter() {
-
+        this.entity.changeAnimation("idle");
     }
 
     @Override

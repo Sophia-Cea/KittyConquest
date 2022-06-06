@@ -24,7 +24,6 @@ public abstract class Entity extends Tile {
 
     @Override
     public void update(float delta){
-
         this.currentAnimation.update(delta);
         this.sprite.setRegion(this.currentAnimation.getFrame());
         this.stateMachine.update(delta);

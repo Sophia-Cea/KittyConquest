@@ -9,6 +9,7 @@ public class PlayerIdleState extends EntityIdleState{
 
     public PlayerIdleState(Entity entity) {
         super(entity);
+        System.out.println("Player becoming idle!");
     }
 
     @Override

@@ -15,7 +15,7 @@ public class WorldPlayer extends Entity {
     public void createAnimations() {
 
         AssetManager am = AssetManager.getInstance();
-        Animation idleAnimation = new Animation(am.get("clover"), 2, 0.5f);
+        Animation idleAnimation = new Animation(am.get("rock01"), 2, 0.5f);
         this.animations.put("idle", idleAnimation);
 
         Animation walkingAnimation = new Animation(am.get("wave"), 3, 0.75f);

@@ -10,7 +10,7 @@ import com.ceashell.kittyconquest.world.entities.Entity;
 import java.awt.*;
 
 public class EntityWalkingState extends EntityState {
-    private static final float DURATION = 50f;
+    private static final float DURATION = 0.5f;
 
     private World world;
 
@@ -24,6 +24,10 @@ public class EntityWalkingState extends EntityState {
         this.world = world;
         this.originalPos = this.entity.getPosition();
         this.targetPos = this.getTargetPosition();
+    }
+
+    @Override
+    public void onEnter() {
         elapsedTime = 0f;
         this.attemptMove();
     }
@@ -33,9 +37,10 @@ public class EntityWalkingState extends EntityState {
         if(world.isInBounds(targetPos) && world.getForegroundTile(targetPos) == null){
             Vector2 spritePos = new Vector2(this.entity.sprite.getX(), this.entity.sprite.getY());
             this.entity.setPosition(targetPos);
-            this.entity.sprite.setX(spritePos.x);
-            this.entity.sprite.setY(spritePos.y);
+            this.entity.sprite.setPosition(spritePos.x, spritePos.y);
+
         } else {
+            System.out.println("Bumped into wall!");
             this.entity.stateMachine.change("idle");
         }
     }
@@ -76,7 +81,7 @@ public class EntityWalkingState extends EntityState {
     }
 
     Point getTargetPosition(){
-        Point target = this.entity.getPosition();
+        Point target = new Point(this.entity.getPosition().x, this.entity.getPosition().y);
         switch(this.entity.direction){
             case UP: target.y += 1; break;
             case DOWN: target.y -= 1; break;

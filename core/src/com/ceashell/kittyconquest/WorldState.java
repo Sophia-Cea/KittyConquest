@@ -50,13 +50,14 @@ public class WorldState extends State {
         overworldPlayer.stateMachine.change("idle");
 
         world.setForegroundTile(overworldPlayer, 2, 2);
+        camera.follow(overworldPlayer.sprite);
 
     }
 
     @Override
     public void update(float delta) {
-        camera.setPosition(overworldPlayer.getPosition());
         world.update(delta);
+        camera.update();
     }
 
     @Override
