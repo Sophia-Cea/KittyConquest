@@ -1,40 +1,45 @@
 package com.ceashell.kittyconquest;
 
 import com.badlogic.gdx.ApplicationAdapter;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.ceashell.kittyconquest.states.GameStateManager;
+import com.ceashell.kittyconquest.states.TestState1;
 
 import java.util.ArrayList;
 
 public class Main extends ApplicationAdapter {
 	public static int WIDTH = 1000;
 	public static int HEIGHT = 700;
-	static int state = 1;
-	ArrayList<State> states;
+	public static SpriteBatch spriteBatch; // TODO : Find a way to share SpriteBatch
+
+	GameStateManager gameStateManager;
 	AssetManager assetManager;
 	
 	@Override
 	public void create () {
-
 		assetManager = new AssetManager();
-		states = new ArrayList<>();
-
-		states.add(new MenuState());
-		states.add(new WorldState());
+		spriteBatch = new SpriteBatch();
+		gameStateManager = new GameStateManager();
+		gameStateManager.push(new TestState1());
 
 	}
 
 	@Override
 	public void render () {
-		State.run(state);
+		gameStateManager.handleInput();
+		gameStateManager.update(Gdx.graphics.getDeltaTime());
+		gameStateManager.render();
 	}
 
 	@Override
 	public void dispose () {
-		states.forEach(State::dispose);
+		gameStateManager.dispose();
 		assetManager.dispose();
 	}
 
 	@Override
 	public void resize(int width, int height) {
-		states.get(state).resize(width, height);
+		gameStateManager.resize(width, height);
 	}
 }
