@@ -1,7 +1,6 @@
 package com.ceashell.kittyconquest.states;
 
 import com.badlogic.gdx.utils.ScreenUtils;
-
 import java.util.Stack;
 
 public class GameStateManager {

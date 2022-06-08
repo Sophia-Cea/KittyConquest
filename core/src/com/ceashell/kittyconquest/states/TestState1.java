@@ -8,21 +8,15 @@ import com.badlogic.gdx.math.Vector2;
 import com.badlogic.gdx.utils.ScreenUtils;
 import com.ceashell.kittyconquest.AssetManager;
 import com.ceashell.kittyconquest.Main;
+import com.ceashell.kittyconquest.player.Player;
+import com.ceashell.kittyconquest.player.PlayerState1;
 
 public class TestState1 extends BaseState {
-    Sprite testSprite;
-    Vector2 velocity;
+    Player player;
     @Override
     public void onEnter() {
-
-        // randomize position
-        float x = (float) (Math.random() * Gdx.graphics.getWidth());
-        float y = (float) (Math.random() * Gdx.graphics.getHeight());
-
-        testSprite = new Sprite(AssetManager.getInstance().get("clover"));
-        testSprite.setPosition(x, y);
-        testSprite.setSize(100, 100);
-
+        player = Player.getInstance();
+        player.setState(new PlayerState1());
     }
 
     @Override
@@ -32,25 +26,18 @@ public class TestState1 extends BaseState {
 
     @Override
     public void update(float delta) {
-        float changeX = (float) ((Math.random() - 0.5f) * delta * 100);
-        float changeY = (float) ((Math.random() - 0.5f)  * delta * 100);
-        testSprite.setPosition(testSprite.getX() + changeX, testSprite.getY() + changeY);
+        player.update(delta);
     }
 
     @Override
     public void handleInput() {
-        if(Gdx.input.isKeyJustPressed(Input.Keys.ENTER)){
-            GameStateManager.getInstance().push(new TestState1());
-        }
-        if(Gdx.input.isKeyJustPressed(Input.Keys.SHIFT_RIGHT)){
-            GameStateManager.getInstance().pop();
-        }
+        player.handleInput();
     }
 
     @Override
     public void render() {
         Main.spriteBatch.begin();
-        testSprite.draw(Main.spriteBatch);
+        player.render();
         Main.spriteBatch.end();
     }
 }
