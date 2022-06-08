@@ -1,19 +1,9 @@
 package com.ceashell.kittyconquest.battle;
 
-import com.badlogic.gdx.graphics.g2d.Sprite;
-import com.badlogic.gdx.graphics.g2d.TextureRegion;
+public class BattlePlayer extends BattleEntity {
 
-import java.util.HashMap;
-
-public class BattlePlayer {
-
-    private int xp;
-    private int level;
-    private float hp;
-    private float maxHP;
-    private Sprite sprite;
-
-    public BattlePlayer(TextureRegion textureRegion){
-        this.sprite = new Sprite(textureRegion);
+    public BattlePlayer(int health, int speed, int strength) {
+        super(health, speed, strength);
     }
+
 }
